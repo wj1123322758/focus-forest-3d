@@ -1,0 +1,186 @@
+/* 2D fallback scene styles (no-WebGL environments). Mirrors the palette of
+   the 3D scene: bright daylight, grass-green ground, one tree species. */
+
+.fallback-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #bfe0f2 0%, #dcefF2 42%, #eef7df 100%);
+}
+
+.fallback-sky {
+  position: absolute;
+  inset: 0;
+}
+
+.fallback-sun {
+  position: absolute;
+  top: 9%;
+  right: 13%;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 38%, #fffdf0, #ffe9a3 70%);
+  box-shadow: 0 0 54px 20px rgba(255, 240, 190, 0.5);
+}
+
+.fallback-cloud {
+  position: absolute;
+  height: 26px;
+  border-radius: 999px;
+  background: #ffffff;
+  opacity: 0.92;
+  box-shadow:
+    22px -12px 0 -4px #ffffff,
+    -24px -8px 0 -7px #ffffff;
+  animation: fallback-drift 90s linear infinite;
+}
+
+.fallback-cloud--a {
+  top: 16%;
+  left: -12%;
+  width: 130px;
+}
+
+.fallback-cloud--b {
+  top: 26%;
+  left: -12%;
+  width: 90px;
+  animation-duration: 130s;
+  animation-delay: -40s;
+  opacity: 0.75;
+}
+
+.fallback-cloud--c {
+  top: 9%;
+  left: -12%;
+  width: 170px;
+  animation-duration: 160s;
+  animation-delay: -90s;
+  opacity: 0.6;
+}
+
+@keyframes fallback-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(130vw);
+  }
+}
+
+.fallback-ground {
+  position: absolute;
+  left: 50%;
+  bottom: -46%;
+  width: 170%;
+  aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 32%, #8cc85e 0%, #79b64a 45%, #5f9a3c 100%);
+}
+
+.fallback-motes {
+  position: absolute;
+  inset: 0;
+}
+
+.fallback-mote {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 250, 220, 0.9);
+  animation: fallback-float 9s ease-in-out infinite;
+}
+
+.fallback-mote--0 { left: 22%; top: 62%; animation-delay: 0s; }
+.fallback-mote--1 { left: 34%; top: 70%; animation-delay: -1.2s; }
+.fallback-mote--2 { left: 46%; top: 58%; animation-delay: -2.6s; }
+.fallback-mote--3 { left: 58%; top: 68%; animation-delay: -3.8s; }
+.fallback-mote--4 { left: 68%; top: 60%; animation-delay: -5s; }
+.fallback-mote--5 { left: 78%; top: 72%; animation-delay: -6.3s; }
+.fallback-mote--6 { left: 28%; top: 78%; animation-delay: -7.4s; }
+.fallback-mote--7 { left: 62%; top: 52%; animation-delay: -8.1s; }
+
+@keyframes fallback-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-16px);
+    opacity: 0.9;
+  }
+}
+
+/* ---- the one tree species, grown by --growth (0..1) ---- */
+.fallback-tree {
+  position: absolute;
+  left: 50%;
+  bottom: 36%;
+  pointer-events: none;
+}
+
+.fallback-tree__inner {
+  transform-origin: 50% 100%;
+  transform: rotate(0deg) scale(calc(0.08 + 0.92 * var(--growth, 0)));
+  transition:
+    transform 1s cubic-bezier(0.22, 0.8, 0.36, 1),
+    filter 1.2s ease;
+}
+
+.fallback-tree__crown {
+  position: relative;
+  width: 148px;
+  height: 112px;
+  margin: 0 auto;
+}
+
+.fallback-tree__leaf {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 30%, #77c55a 0%, #4f9c3a 55%, #3d7f2e 100%);
+  box-shadow: inset -6px -8px 14px rgba(0, 0, 0, 0.12);
+}
+
+.fallback-tree__trunk {
+  width: 16px;
+  height: 96px;
+  margin: -8px auto 0;
+  border-radius: 7px 7px 4px 4px;
+  background: linear-gradient(90deg, #6f4526, #8a5a33 55%, #6f4526);
+}
+
+/* Withered: frozen size, desaturated brown-grey, leaning over. */
+.fallback-tree.is-withered .fallback-tree__inner {
+  transform: rotate(9deg) scale(calc(0.08 + 0.92 * var(--growth, 0)));
+  filter: saturate(0.4) sepia(0.5) brightness(0.95);
+}
+
+.fallback-notice {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(16, 24, 19, 0.55);
+  color: #f2f7ef;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fallback-cloud,
+  .fallback-mote {
+    animation: none;
+  }
+  .fallback-tree__inner {
+    transition: none;
+  }
+}

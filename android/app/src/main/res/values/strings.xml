@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Focus Forest 3D</string>
+    <string name="title_activity_main">Focus Forest 3D</string>
+    <string name="package_name">com.focusforest.tree</string>
+    <string name="custom_url_scheme">com.focusforest.tree</string>
+</resources>

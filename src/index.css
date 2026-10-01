@@ -1,0 +1,55 @@
+/* ============================================================
+   全局基础样式（唯一职责：reset + 画布兜底 + HUD 穿透）
+   - 3D 场景样式由 src/scene 组件自行负责（inline props）
+   - HUD 样式归 src/ui/hud.css（由 ui 负责人维护）
+   本文件不写任何 .hud 内部样式，也不写 ui/ 下的类。
+   ============================================================ */
+
+:root {
+  color-scheme: dark;
+}
+
+/* ---------- reset ---------- */
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- html / body / #root 撑满整个视口 ---------- */
+html,
+body,
+#root {
+  height: 100%;
+  overscroll-behavior: none; /* 禁橡皮筋滚动，全屏画布不被拖动 */
+  user-select: none; /* 全局禁选，拖拽镜头时不选中文字 */
+}
+
+body {
+  /* 渲染器异步初始化期间的兜底底色（深海色） */
+  background: #0d2233;
+  font-family: system-ui, -apple-system, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+}
+
+/* ---------- app 外壳：固定铺满视口 ---------- */
+.app {
+  position: fixed;
+  inset: 0;
+}
+
+/* ---------- R3F canvas：撑满父容器且不劫持手势 ---------- */
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+/* ---------- HUD 穿透层：自身不接事件，保证不挡镜头拖拽 ---------- */
+.hud-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}

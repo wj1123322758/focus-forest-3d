@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+.vscode/
+npm-debug.log
+
+# 本地构建产物与调试截图（不应进仓库）
+*.apk
+apk-*.png
+emulator-*.png
+
+# Capacitor / Android：cap sync 生成的副本与机器相关配置
+android/local.properties
+android/app/src/main/assets/public/
+android/capacitor-cordova-android-plugins/
+android/app/build/
+android/build/
+android/.gradle/
+android/app/release/
+android/app/debug/
+*.keystore
+*.jks
+
+# ZCode 本地工具配置
+.zcodeignore
